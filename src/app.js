@@ -12,12 +12,4 @@ window.onload = function() {
   state.start();
   document.body.style.backgroundColor = "darkgreen";
   buildTable();
-  let button = document.createElement("button");
-  button.innerHTML = "change state";
-  button.addEventListener("click", () => console.log(state.stacked));
-  document.body.appendChild(button);
-  console.log("Hello Rigo from the console!", state.stacked);
-  state.registerListener(function(val) {
-    console.log("Someone changed the value of state.a to ", val);
-  });
 };

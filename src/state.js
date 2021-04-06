@@ -1,29 +1,31 @@
 export let state = {
-  stackedInternal: [],
-  stackedListener: function(newStack) {},
-  set stacked(newStack) {
-    this.stackedListener(newStack);
-    this.stackedInternal = newStack;
+  _dominoes: [],
+  _dominoesListener: function(newStack) {
+    console.log("new state.dominoes: ", newStack);
   },
-  get stacked() {
-    return this.stackedInternal;
+  set dominoes(newStack) {
+    this._dominoes = newStack;
+    this._dominoesListener(newStack);
   },
-  registerListener: function(listener) {
-    this.stackedListener = listener;
+  get dominoes() {
+    return this._dominoes;
+  },
+  registerListener: function(newListener) {
+    this._dominoesListener = newListener;
   },
   start: function() {
-    const startingLots = [0, 1, 2, 3, 4, 5, 6].map(number => {
+    const rawSets = [0, 1, 2, 3, 4, 5, 6].map(number => {
       let lot = [];
       for (let index = number; index < 7; index++) {
         lot.push([number, index]);
       }
       return lot;
     });
-    let startingLot = [];
-    for (let lot of startingLots) {
-      startingLot.push(...lot);
+    let startingSet = [];
+    for (let lot of rawSets) {
+      startingSet.push(...lot);
     }
-    this.stacked = startingLot;
+    this.dominoes = startingSet;
     return true;
   }
 };
