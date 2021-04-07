@@ -1,7 +1,11 @@
+import { render } from "./builders";
+import { Domino } from "./Domino";
+
 export let state = {
   _dominoes: [],
   _dominoesListener: function(newStack) {
     console.log("new state.dominoes: ", newStack);
+    render();
   },
   set dominoes(newStack) {
     this._dominoes = newStack;
@@ -14,18 +18,7 @@ export let state = {
     this._dominoesListener = newListener;
   },
   start: function() {
-    const rawSets = [0, 1, 2, 3, 4, 5, 6].map(number => {
-      let lot = [];
-      for (let index = number; index < 7; index++) {
-        lot.push([number, index]);
-      }
-      return lot;
-    });
-    let startingSet = [];
-    for (let lot of rawSets) {
-      startingSet.push(...lot);
-    }
-    this.dominoes = startingSet;
+    this.dominoes = Domino.start();
     return true;
   }
 };
